@@ -1,0 +1,43 @@
+<mat-table  [dataSource]="courses" matSort aria-label="tabela">
+
+  <!-- name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell  *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Curso
+    </mat-header-cell>
+    <mat-cell *matCellDef="let courses"> {{courses.name}} </mat-cell>
+  </ng-container>
+
+  <!-- category Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Categoria
+    </mat-header-cell>
+    <mat-cell *matCellDef="let courses"> {{courses.category}}
+      <mat-icon aria-hidden="false" aria-label="Category do course">{{ courses.category | category }}</mat-icon>
+    </mat-cell>
+  </ng-container>
+  
+   <!-- Actions Column -->
+   <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef ortActionDescription="Sort by name" class="action-column-header">
+      <button mat-mini-fab color="accent" aria-label="Adicionar um curso" (click)="onAdd()">
+        <mat-icon >add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let course" class="action-column">
+      <button mat-icon-button color="primary" aria-label="Editar curso" (click)="onEdit(course)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover curso" (click)="onDelete(course)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row  *matHeaderRowDef="displayTemplate"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayTemplate;"></mat-row>
+
+</mat-table>
